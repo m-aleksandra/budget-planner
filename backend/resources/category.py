@@ -36,7 +36,6 @@ class CategoryList(MethodView):
         return {"categories": json_categories}
     
     
-    # @CategoryBlueprint.arguments(CategorySchema)
     def post(self):
         name = request.json.get("name")
 

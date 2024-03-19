@@ -4,9 +4,7 @@ import BudgetsPage from './pages/BudgetsPage.jsx'
 import TransactionsPage from './pages/TransactionsPage.jsx'
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
+  RouterProvider
 } from "react-router-dom";
 
 

@@ -6,7 +6,6 @@ from models.category import CategoryModel
 from models.account import AccountModel
 from models.budget import BudgetModel
 from datetime import datetime
-from db import db
 
 TransactionBlueprint = Blueprint("transaction", __name__, description="Operations on transactions")
 
@@ -26,7 +25,8 @@ class Transaction(MethodView):
         if not transaction:
             abort(404, message="Transaction not found")
         
-
+        
+        BudgetModel.find_update(transaction.category_id, transaction.account_id, transaction.amount, transaction.date, add=False)
         data = request.json
         transaction.title = data.get("title", transaction.title)
         date_str = data.get("date", transaction.date)
@@ -34,8 +34,10 @@ class Transaction(MethodView):
         transaction.amount = data.get("amount", transaction.amount)
         transaction.account_id = data.get("accountId", transaction.account_id)
         transaction.category_id = data.get("categoryId", transaction.category_id)
+        
         try:
             transaction.save_to_db()
+            BudgetModel.find_update(transaction.category_id, transaction.account_id, transaction.amount, transaction.date, add=True)
         except Exception as e:
             abort(404, message=str(e))
 
@@ -77,10 +79,8 @@ class TransactionList(MethodView):
             category.save_to_db()
         category_id = category.id
        
-
         new_transaction = TransactionModel(title=title, date=date, amount=amount, account_id=account_id, category_id=category_id)
       
-        
         try:
             new_transaction.save_to_db()
             saved_transaction = TransactionModel.query.get(new_transaction.id)

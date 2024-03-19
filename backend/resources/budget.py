@@ -29,13 +29,14 @@ class Budget(MethodView):
 
 
     def delete(self, budget_id):
-        budget = BudgetModel.query.get(budget_id).json()
+        budget = BudgetModel.query.get(budget_id)
 
         if not budget:
             abort(404, message="Budget not found")
 
         try:
             budget.delete_from_db()
+            return {"budget": "deleted"}
         except Exception as e:
             abort(404, message=str(e))
 

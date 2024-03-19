@@ -50,8 +50,12 @@ class BudgetModel(db.Model):
 
         if budget and add:
             budget.amount = budget.amount + amount if budget.amount else amount
+            budget.save_to_db()
         elif budget:
             budget.amount = budget.amount - amount if budget.amount else amount
+            budget.save_to_db()
+        
+        
 
 
     def save_to_db(self):
