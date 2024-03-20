@@ -6,7 +6,7 @@ import { useState } from "react";
 import BudgetList from "../components/BudgetList";
 import AddBudgetModal from "../components/AddBudgetModal";
 import Menu from "../components/Menu";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 function BudgetsPage() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
@@ -16,10 +16,13 @@ function BudgetsPage() {
       <TransactionProvider>
         <CategoryProvider>
           <BudgetProvider>
+            <Container className="d-flex justify-content-end mt-4 mb-4">
+              <Button onClick={() => setShowAddBudgetModal(true)}>
+                New Budget
+              </Button>
+            </Container>
             <BudgetList />
-            <Button onClick={() => setShowAddBudgetModal(true)}>
-              New Budget
-            </Button>
+
             <AddBudgetModal
               show={showAddBudgetModal}
               handleClose={() => setShowAddBudgetModal(false)}

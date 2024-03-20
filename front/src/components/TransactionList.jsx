@@ -2,7 +2,7 @@ import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import { useTransaction } from "../contexts/TransactionContext";
 import { currencyFormatter, displayPrettyDate } from "../utils";
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import AddTransactionModal from "./AddTransactionModal"; // Adjust the path as necessary
 
@@ -23,23 +23,33 @@ const TransactionList = () => {
 
   return (
     <>
+    <Container>
       <ListGroup as="ul">
         {transactions.map((transaction) => (
           <ListGroup.Item
             as="li"
             key={transaction.id}
-            className="d-flex justify-content-between align-items-start"
+            className="d-flex justify-content-between align-items-center mb-2"
           >
-            <div className="ms-2 me-auto">
-              <div className="fw-bold">{transaction.title}</div>
-              <div>{transaction.categoryName}</div>
-              {displayPrettyDate(transaction.date)}
-            </div>
-            <Badge bg="primary" pill>
-              {currencyFormatter.format(transaction.amount)}
-            </Badge>
-            <Button variant="danger" onClick={() => handleDelete(transaction.id)}>Delete</Button>
-            <Button variant="primary" onClick={() => handleUpdate(transaction)}>Update</Button>
+            <Container>
+              <Row>
+                <Col xs={4} className="d-flex flex-column">
+                  <span className="fw-bold">{transaction.title}</span>
+                  <span>{transaction.categoryName}</span>
+                  
+                </Col >
+                <Col xs={4}>
+                  <span>{displayPrettyDate(transaction.date)}</span>
+                </Col>
+                <Col xs={4} className="d-flex justify-content-end align-items-center">
+                  <Badge bg="primary" pill className="me-2">
+                    {currencyFormatter.format(transaction.amount)}
+                  </Badge>
+                  <Button variant="danger" size="sm" className="me-2" onClick={() => handleDelete(transaction.id)}>Delete</Button>
+                  <Button variant="primary" size="sm" onClick={() => handleUpdate(transaction)}>Update</Button>
+                </Col>
+              </Row>
+            </Container>
           </ListGroup.Item>
         ))}
       </ListGroup>
@@ -50,7 +60,7 @@ const TransactionList = () => {
           existingTransaction={currentTransaction}
           mode="update"
         />
-      )}
+      )}</Container>
     </>
   );
 };

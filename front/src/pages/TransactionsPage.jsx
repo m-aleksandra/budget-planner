@@ -5,7 +5,7 @@ import TransactionList from "../components/TransactionList";
 import AddTransactionModal from "../components/AddTransactionModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Menu from "../components/Menu";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useState } from "react";
 
 function TransactionsPage() {
@@ -15,9 +15,11 @@ function TransactionsPage() {
       <Menu />
       <CategoryProvider>
         <TransactionProvider>
-          <Button onClick={() => setShowAddTransactionModal(true)}>
-            New Transaction
-          </Button>
+        <Container className="d-flex justify-content-end mt-4 mb-4">
+            <Button onClick={() => setShowAddTransactionModal(true)} variant="primary">
+              New Transaction
+            </Button>
+          </Container>
           <TransactionList />
           <AddTransactionModal
             show={showAddTransactionModal}

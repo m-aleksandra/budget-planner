@@ -53,7 +53,7 @@ class Transaction(MethodView):
        
         try:
             transaction.delete_from_db()
-            return {"transaction": "transaction deleted"}
+            return 200
         except Exception as e:
             abort(404, message=str(e))
 

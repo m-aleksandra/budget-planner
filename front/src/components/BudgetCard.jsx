@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ViewTransactionsModal from "./ViewTransactions";
 import { useBudget } from "../contexts/BudgetContext";
 import AddTransactionModal from "./AddTransactionModal";
+import { getMonth } from "../utils";
 
 export default function BudgetCard({
   name,
@@ -49,7 +50,7 @@ export default function BudgetCard({
           <div className="me-2">
             <div>{name}</div>
             <div>
-              {year}, {month}
+              {year}, {getMonth[month]}
             </div>
           </div>
           <div className="d-flex align-items-baseline">
@@ -71,15 +72,25 @@ export default function BudgetCard({
           />
         )}
         {
-          <Stack direction="horizontal" gap="2" className="mt-4">
-            <Button variant="outline-primary" className="ms-auto" onClick={() => setShowAddTransactionModal(true)}>
+          <Stack
+            direction="horizontal"
+            gap="2"
+            className="mt-4 d-flex align-items-stretch"
+          >
+            <Button
+              variant="outline-primary"
+              className="ms-auto"
+              onClick={() => setShowAddTransactionModal(true)}
+            >
               Add Expense
             </Button>
-           {showAddTransactionModal && (<AddTransactionModal
-            show={showAddTransactionModal}
-            handleClose={() => setShowAddTransactionModal(false)}
-            categoryName={budget.categoryName}
-          />) }
+            {showAddTransactionModal && (
+              <AddTransactionModal
+                show={showAddTransactionModal}
+                handleClose={() => setShowAddTransactionModal(false)}
+                categoryName={budget.categoryName}
+              />
+            )}
 
             <Button
               variant="outline-secondary"
@@ -95,7 +106,12 @@ export default function BudgetCard({
                 transactions={budget.transactions || []}
               />
             )}
-            <Button variant="outline-danger" onClick={() => onDelete()}>Delete</Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => onDelete()}
+            >
+              Delete
+            </Button>
           </Stack>
         }
       </Card.Body>

@@ -40,7 +40,7 @@ class Account(MethodView):
         
         try:
             account.delete_from_db()
-            return {"account": "account deleted"}
+            return 200
         except Exception as e:
             return abort(404, message=str(e))
     

@@ -23,7 +23,6 @@ class Budget(MethodView):
         transactions_json = [t.json() for t in transactions] 
 
         budget_json['transactions'] = transactions_json
-        print(budget_json)
         
         return { "budget": budget_json }
 
@@ -75,5 +74,4 @@ class BudgetList(MethodView):
             budget.save_to_db()
             return {"budget": budget.json()}, 200
         except Exception as e:
-            db.session.rollback()
             abort(404, str(e))

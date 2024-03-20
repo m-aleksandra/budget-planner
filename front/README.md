@@ -1,8 +1,17 @@
-# React + Vite
+# Budget Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Budget Tracker is a simple app designed to help users manage their finances with ease. It allows for the setting of monthly budgets, addition of expenses under specific categories, and visual representation of financial activity through graphs. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **Monthly Budgets**: Users can set up custom budgets for each month.
+- **Expense Tracking**: Expenses can be easily added under various categories for better organization.
+- **Graphical Insights**: App uses chart.js library to visually represent spending.
+
+
+## Upcoming Features
+
+- App will enable reading transactions from csv file
+- Multiple Accounts Management 
