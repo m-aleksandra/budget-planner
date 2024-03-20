@@ -2,7 +2,9 @@
 
 ## Description
 
-Budget Tracker is a simple app designed to help users manage their finances with ease. It allows for the setting of monthly budgets, addition of expenses under specific categories, and visual representation of financial activity through graphs. 
+Budget Tracker is a simple app designed to help users manage their finances with ease. It allows for the setting of monthly budgets, addition of expenses under specific categories, and visual representation of financial activity through graphs.
+- **Frontend**: React, JavaScript.
+- **Backend**: Flask, Python, SQLite.
 
 ## Features
 
