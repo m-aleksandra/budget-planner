@@ -10,9 +10,6 @@ from db import db
 FileBlueprint = Blueprint("file", __name__, description="Operations on files")
 @FileBlueprint.route('/file')
 class File(MethodView):
-    def get(self):
-        return {"status": "ok"}, 200
-
     def post(self):
         if 'file' not in request.files:
             abort(400, message='No file part' )
