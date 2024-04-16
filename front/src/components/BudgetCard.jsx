@@ -13,10 +13,10 @@ export default function BudgetCard({
   year,
   month,
   gray,
-  budgetId,
+  budgetId
 }) {
   const classNames = [];
-  if (amount > max) {
+  if (Math.abs(amount) > max) {
     classNames.push("bg-danger", "bg-opacity-10");
   } else if (gray) {
     classNames.push("bg-light");
@@ -26,7 +26,7 @@ export default function BudgetCard({
   const [budget, setBudget] = useState(null);
   const [showTransactionsModal, setShowTransactionsModal] = useState(false);
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
-
+  
   useEffect(() => {
     const fetchBudgetData = async () => {
       const budgetData = await getBudget(budgetId);
@@ -37,6 +37,7 @@ export default function BudgetCard({
 
     fetchBudgetData();
   }, [budgetId, getBudget]);
+
 
   const onDelete = async () => {
     await deleteBudget(budgetId);
@@ -54,7 +55,7 @@ export default function BudgetCard({
             </div>
           </div>
           <div className="d-flex align-items-baseline">
-            {currencyFormatter.format(amount)}
+            {currencyFormatter.format(Math.abs(amount))}
             {max && (
               <span className="text-muted fs-6 ms-1">
                 / {currencyFormatter.format(max)}
@@ -65,10 +66,10 @@ export default function BudgetCard({
         {max && (
           <ProgressBar
             className="rounded-pill"
-            variant={getProgressBarVariant(amount, max)}
+            variant={getProgressBarVariant(Math.abs(amount), max)}
             min={0}
             max={max}
-            now={amount}
+            now={Math.abs(amount)}
           />
         )}
         {

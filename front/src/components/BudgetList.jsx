@@ -3,6 +3,7 @@ import { useBudget } from "../contexts/BudgetContext";
 import { Container } from "react-bootstrap";
 const BudgetList = () => {
   const { budgets } = useBudget();
+  
   return (
     <>
       <Container className="mt-4">

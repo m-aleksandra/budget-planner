@@ -4,7 +4,7 @@ import { useTransaction } from "../contexts/TransactionContext";
 import { currencyFormatter, displayPrettyDate } from "../utils";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import AddTransactionModal from "./AddTransactionModal"; // Adjust the path as necessary
+import AddTransactionModal from "./AddTransactionModal"; 
 
 const TransactionList = () => {
   const { transactions, deleteTransaction, fetchTransactions } = useTransaction();

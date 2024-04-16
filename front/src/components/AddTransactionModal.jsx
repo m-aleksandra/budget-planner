@@ -59,7 +59,7 @@ const AddTransactionModal = ({ show, handleClose, existingTransaction = null, mo
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Amount: </Form.Label>
-            <Form.Control type="number" ref={amount} />
+            <Form.Control type="number" step="0.01" ref={amount} />
           </Form.Group>
           {!categoryName && (
             <Form.Group controlId="category">

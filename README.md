@@ -11,7 +11,3 @@ Budget Tracker is a simple app designed to help users manage their finances with
 - **Graphical Insights**: App uses chart.js library to visually represent spending.
 
 
-## Upcoming Features
-
-- App will enable reading transactions from csv file
-- Multiple Accounts Management 
