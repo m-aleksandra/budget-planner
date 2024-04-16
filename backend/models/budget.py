@@ -10,6 +10,8 @@ class BudgetModel(db.Model):
     max = db.Column(db.Float)
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
     account_id = db.Column(db.Integer, db.ForeignKey("accounts.id"))
+    account = db.relationship("AccountModel", back_populates="budgets")
+    category = db.relationship("CategoryModel", back_populates="budgets")
 
 
     def __init__(self, category_id, month, year, max, account_id):

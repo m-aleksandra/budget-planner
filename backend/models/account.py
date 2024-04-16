@@ -7,10 +7,12 @@ class AccountModel(db.Model):
     name = db.Column(db.String(100))
     currency = db.Column(db.String(20))
     balance = db.Column(db.Float)
+    budgets = db.relationship("BudgetModel", back_populates="account", lazy="dynamic")
+    transactions = db.relationship("TransactionModel", back_populates="account", lazy="dynamic", cascade="all, delete")
 
-    budgets = db.relationship("BudgetModel", backref="account", lazy='dynamic')
-    transactions = db.relationship("TransactionModel", backref="account",
-                                    lazy="dynamic", cascade="all, delete")
+    # budgets = db.relationship("BudgetModel", backref="account", lazy='dynamic')
+    # transactions = db.relationship("TransactionModel", backref="account",
+    #                                 lazy="dynamic", cascade="all, delete")
 
     def __init__(self, name, currency, balance):
         self.name = name

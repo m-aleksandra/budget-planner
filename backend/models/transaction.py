@@ -11,6 +11,8 @@ class TransactionModel(db.Model):
     amount = db.Column(db.Float)
     account_id = db.Column(db.Integer, db.ForeignKey("accounts.id"))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    account = db.relationship("AccountModel", back_populates="transactions")
+    category = db.relationship("CategoryModel", back_populates="transactions")
 
 
     def __init__(self, title, date, amount, account_id, category_id):

@@ -24,7 +24,6 @@ const AddTransactionModal = ({ show, handleClose, existingTransaction = null, mo
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = {
       title: title.current.value,
       amount: amount.current.value,
@@ -32,9 +31,11 @@ const AddTransactionModal = ({ show, handleClose, existingTransaction = null, mo
       category: categoryName ? categoryName : category.current.value,
       accountId: 1, 
     };
+    
 
     if (mode === 'add') {
       await addTransaction(data);
+      console.log("Sending data to server:", data);
     } else if (mode === 'update' && existingTransaction?.id) {
       await updateTransaction(existingTransaction.id, data);
     }

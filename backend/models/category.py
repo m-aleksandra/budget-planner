@@ -5,10 +5,10 @@ class CategoryModel(db.Model):
     __tablename__ = "categories"
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40))
+    name = db.Column(db.String(40), unique=True)
+    budgets = db.relationship("BudgetModel", back_populates="category", lazy="dynamic")
+    transactions = db.relationship("TransactionModel", back_populates="category", lazy="dynamic")
 
-    budgets = db.relationship("BudgetModel", backref="category", lazy="dynamic")
-    transactions = db.relationship("TransactionModel", backref="category", lazy="dynamic")
 
     def __init__(self, name):
         self.name = name

@@ -4,16 +4,15 @@ from flask_smorest import Blueprint, abort
 from models.budget import BudgetModel
 from models.category import CategoryModel
 from models.transaction import TransactionModel
-from db import db
 from schemas import BudgetSchema
-from datetime import datetime
 
-BudgetBlueprint = Blueprint("budget", __name__, description="Budget")
+blp = Blueprint("budget", __name__, description="Budget")
 
-@BudgetBlueprint.route("/budget/<string:budget_id>")
+@blp.route("/budget/<string:budget_id>")
 class Budget(MethodView):
     def get(self, budget_id):
         budget = BudgetModel.query.get(budget_id)
+
         if not budget:
             abort(404, message="Budget not found")
         
@@ -24,7 +23,7 @@ class Budget(MethodView):
 
         budget_json['transactions'] = transactions_json
         
-        return { "budget": budget_json }
+        return {"budget": budget_json}, 200
 
 
     def delete(self, budget_id):
@@ -35,17 +34,17 @@ class Budget(MethodView):
 
         try:
             budget.delete_from_db()
-            return {"budget": "deleted"}
+            return '', 204
         except Exception as e:
-            abort(404, message=str(e))
+            abort(500, message=str(e))
 
 
-@BudgetBlueprint.route("/budget")
+@blp.route("/budget")
 class BudgetList(MethodView):
     def get(self):
         budget_data = BudgetModel.find_all()
         budgets = list(map(lambda x: x.json(), budget_data))
-        return {"budgets": budgets}
+        return {"budgets": budgets}, 200
     
     def post(self):
         data = request.get_json()
@@ -58,7 +57,9 @@ class BudgetList(MethodView):
         }
 
         category_name = data['category']
+
         category = CategoryModel.query.filter_by(name=category_name).first()
+
         if not category:
             category = CategoryModel(name=category_name)
             category.save_to_db()
@@ -72,6 +73,6 @@ class BudgetList(MethodView):
 
         try:
             budget.save_to_db()
-            return {"budget": budget.json()}, 200
+            return {"budget": budget.json()}, 201
         except Exception as e:
             abort(404, str(e))

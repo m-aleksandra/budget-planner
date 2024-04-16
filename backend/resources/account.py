@@ -3,7 +3,6 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from models.account import AccountModel
 from db import db
-from schemas import AccountSchema
 
 AccountBlueprint = Blueprint("account", __name__, description="Operations on accounts")
 
@@ -16,7 +15,6 @@ class Account(MethodView):
         except Exception as e:
             abort(404, message="Account not found")
     
-    @AccountBlueprint.arguments(AccountSchema)
     def patch(self, data, account_id):
         account = AccountModel.query.get(account_id)
 

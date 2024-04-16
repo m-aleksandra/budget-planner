@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
 from flask_smorest import Api
 from resources.account import AccountBlueprint
-from resources.transaction import TransactionBlueprint
-from resources.category import CategoryBlueprint
-from resources.budget import BudgetBlueprint
+from resources.csv_reader import FileBlueprint
+from resources.transaction import blp as TransactionBlp
+from resources.category import blp as CategoryBlp
+from resources.budget import blp as BudgetBlp
+
 from db import db
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -20,9 +22,10 @@ api = Api(app)
 db.init_app(app)
 
 api.register_blueprint(AccountBlueprint)
-api.register_blueprint(TransactionBlueprint)
-api.register_blueprint(CategoryBlueprint)
-api.register_blueprint(BudgetBlueprint)
+api.register_blueprint(FileBlueprint)
+api.register_blueprint(TransactionBlp)
+api.register_blueprint(BudgetBlp)
+api.register_blueprint(CategoryBlp)
 
 
 migrate = Migrate(app, db)
